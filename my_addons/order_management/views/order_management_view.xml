@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+        <record id="order_management_form_view" model="ir.ui.view">
+            <field name="name">Quản lý đơn hàng</field>
+            <field name="model">order.management</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_print_excel" string="In Excel" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="project_name" string="Tên Dự Án" required="1"/>
+                                <field name="customer" string="Tên Khách Hàng" required="1"/>
+                            </group>
+                            <group>
+                                <field name="site_id" string="Tên Công Trường" required="1"/>
+                            </group>
+                        </group>
+                        <field name="line_ids" string="Chi tiết sản phẩm">
+                            <tree editable="bottom">
+                                <field name="management_id" invisible="1"/>
+                                <field name="product_id" string="Tên loại cọc" required="1"/>
+                                <field name="length" string="Chiều dài"/>
+                                <field name="type" string="Loại"/>
+                                <field name="piece" string="Đoạn"/>
+                                <field name="met" string="m"/>
+                                <field name="contract" string="Hợp đồng"/>
+                                <field name="expected_date" string="Ngày dự kiến giao"/>
+                                <field name="quantity_produced" string="SL đã sản xuất"/>
+                                <field name="quantity_remain" string="SL chưa sản xuất"/>
+                                <field name="origin" string="Nguồn cung cấp" required="1"/>
+                            </tree>
+                        </field>
+                        <group>
+                            <group></group>
+                            <group>
+                                <field name="total_qty_produced" string="Tổng đã cấp"/>
+                                <field name="total_qty_remain" string="Tổng chưa cấp"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="order_management_tree" model="ir.ui.view">
+            <field name="name">order.management.tree</field>
+            <field name="model">order.management</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="project_name"/>
+                    <field name="customer"/>
+                    <field name="site_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_order_management" model="ir.actions.act_window">
+            <field name="name">Quản lý đơn hàng</field>
+            <field name="res_model">order.management</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="order_management_tree"/>
+        </record>
+
+        <menuitem name="Quản lý đơn hàng"
+                  id="menu_order_management_root"
+                  web_icon="order_management,static/description/icon.png"
+                  sequence="1"/>
+
+        <menuitem id="menu_order_management"
+                  parent="menu_order_management_root"
+                  action="action_order_management"
+                  sequence="1"/>
+    </data>
+</odoo>

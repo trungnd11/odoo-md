@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <record id="site_management_form_view" model="ir.ui.view">
+            <field name="name">Quản lý tên công trường</field>
+            <field name="model">site.management</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Tên công trường" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="site_management_tree" model="ir.ui.view">
+            <field name="name">site.management.tree</field>
+            <field name="model">site.management</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_site_management" model="ir.actions.act_window">
+            <field name="name">Quản lý tên công trường</field>
+            <field name="res_model">site.management</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="site_management_tree"/>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="menu_site_management"
+                  parent="menu_order_management_root"
+                  action="action_site_management" sequence="2"/>
+    </data>
+</odoo>
